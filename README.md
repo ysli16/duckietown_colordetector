@@ -4,11 +4,11 @@
 
 build container:
 
-docker -H luna.local build -t colordetector .  
+`docker -H luna.local build -t colordetector .  `
 
 run container:
 
-docker -H luna.local run -e N_SPLITS=10 -it --privileged colordetector
+`docker -H luna.local run -e N_SPLITS=10 -it --privileged colordetector`
 
 N_SPLITS is the environment veriable indicating the number of horizontal splits of the image
 
