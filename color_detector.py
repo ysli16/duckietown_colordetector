@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+#import pandas as pd
 from time import sleep
 import os
 
@@ -20,6 +21,7 @@ red_lower_2=np.array([170,0,255*0.3],dtype=np.int32)
 red_upper_2=np.array([180,255,255],dtype=np.int32)
 
 result=np.zeros(shape=(N_SPLITS,4)) #number of pixels in white/yellow/red/others
+cols=["white","yellow","red","other"]
 np.set_printoptions(suppress=True)
 while(True):
     # Capture frame-by-frame
@@ -49,10 +51,11 @@ while(True):
         white_num=int(np.sum(white_mask[grid[i]:grid[i+1],:])/255)
         yellow_num=int(np.sum(yellow_mask[grid[i]:grid[i+1],:])/255)
         red_num=int(np.sum(red_mask[grid[i]:grid[i+1],:])/255)
-        other_num=imgsize[1]*round(imgsize[0]/N_SPLITS)-white_num-yellow_num-red_num
+        other_num=imgsize[1]*round(grid[i+1]-grid[i])-white_num-yellow_num-red_num
         result[i]=[white_num,yellow_num,red_num,other_num]
-    print(imgHLS[:,:,0])
-    print("white","yellow","red","other")
+#    print(imgHLS[:,:,0])
+#    result=pd.DataFrame(result, columns=cols)
+    print(cols)
     print(result)
     sleep(1)
 
